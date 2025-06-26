@@ -12,7 +12,14 @@ function App() {
       case "FIELD_UPDATE":
         return {
           ...state,
-          [action.payload.filed]: action.payload.value,
+          [action.payload.field]: action.payload.value,
+        };
+      case "RESET":
+        return initialState;
+      case "FIELD_CLEAR":
+        return {
+          ...state,
+          [action.payload.field]: "",
         };
       default:
         state;
@@ -24,11 +31,12 @@ function App() {
     dispatch({
       type: "FIELD_UPDATE",
       payload: {
-        filed: event.target.name,
+        field: event.target.name,
         value: event.target.value,
       },
     });
   };
+
   const handlerSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
@@ -40,22 +48,72 @@ function App() {
           <ul>
             <li>
               <label htmlFor="name">Name</label>
-              <input onChange={handlerOnChange} type="text" name="name" id="" />
+              <input
+                value={user.name}
+                onChange={handlerOnChange}
+                type="text"
+                name="name"
+                id=""
+              />
+              <button
+                onClick={() =>
+                  dispatch({
+                    type: "FIELD_CLEAR",
+                    payload: {
+                      field: "name",
+                    },
+                  })
+                }
+              >
+                clear
+              </button>
             </li>
             <li>
               <label htmlFor="email">Email</label>
               <input
+                value={user.email}
                 onChange={handlerOnChange}
                 type="email"
                 name="email"
                 id=""
               />
+              <button
+                onClick={() =>
+                  dispatch({
+                    type: "FIELD_CLEAR",
+                    payload: {
+                      field: "email",
+                    },
+                  })
+                }
+              >
+                clear
+              </button>
             </li>
             <li>
               <label htmlFor="phone">Phone</label>
-              <input onChange={handlerOnChange} type="tel" name="phone" id="" />
+              <input
+                value={user.phone}
+                onChange={handlerOnChange}
+                type="tel"
+                name="phone"
+                id=""
+              />
+              <button
+                onClick={() =>
+                  dispatch({
+                    type: "FIELD_CLEAR",
+                    payload: {
+                      field: "phone",
+                    },
+                  })
+                }
+              >
+                clear
+              </button>
             </li>
           </ul>
+          <button onClick={() => dispatch({ type: "RESET" })}>Reset</button>
           <input type="submit" value="Submit" />
         </form>
       </div>
