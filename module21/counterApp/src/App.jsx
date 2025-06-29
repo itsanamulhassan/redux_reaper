@@ -14,7 +14,16 @@ function App() {
         <li>
           <button
             onClick={() => {
-              dispatch(increment());
+              dispatch(increment(5));
+            }}
+          >
+            Increment by 5
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => {
+              dispatch(increment(1));
             }}
           >
             Increment
@@ -26,7 +35,7 @@ function App() {
         <li>
           <button
             onClick={() => {
-              dispatch(decrement());
+              dispatch(decrement(1));
             }}
           >
             Decrement
