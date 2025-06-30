@@ -4,7 +4,7 @@ import { decrement, increment } from "./redux/features/counter/counterSlice";
 
 function App() {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.counter);
 
   return (
     <div>
@@ -30,7 +30,7 @@ function App() {
           </button>
         </li>
         <li>
-          <h2>{state.counter.count}</h2>
+          <h2>{state.count}</h2>
         </li>
         <li>
           <button

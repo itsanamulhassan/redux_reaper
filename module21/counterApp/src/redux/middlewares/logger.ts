@@ -1,5 +1,9 @@
 const logger = (state) => (next) => (action) => {
-  console.log(state.getState);
-  console.log(action);
+  console.group(action.type);
+  console.info(state.getState());
+  const result = next(action);
+  console.info("Next state: ", state.getState());
+  console.groupEnd();
+  return next(action);
 };
 export default logger;
